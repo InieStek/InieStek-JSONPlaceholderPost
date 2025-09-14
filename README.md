@@ -31,7 +31,7 @@ The application can be run directly from the command line using Maven.
     ```bash
     mvn exec:java -Dexec.mainClass="PostApplication"
     ```
-    The application will fetch the posts and save them into the `output` directory in the project's root.
+    The application will fetch the posts and save them into the `posts` directory in the project's root.
 
 ## Testing
 

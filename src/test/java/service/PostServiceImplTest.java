@@ -26,31 +26,31 @@ class PostServiceImplTest {
   @InjectMocks private PostServiceImpl postService;
 
   @Test
-  void fetchAndSavePosts_shouldCallApiAndStorageServices() {
+  void fetchSavePosts_shouldCallApiAndStorageServices() {
     List<Post> posts = Collections.singletonList(new Post(1, 1, "title", "body"));
     when(apiService.fetchPosts()).thenReturn(posts);
 
-    postService.fetchAndSavePosts();
+    postService.fetchSavePosts();
 
     verify(apiService).fetchPosts();
     verify(postStorageService).savePosts(posts);
   }
 
   @Test
-  void fetchAndSavePosts_shouldThrowPostFetchException_whenApiFails() {
+  void fetchSavePosts_shouldThrowPostFetchException_whenApiFails() {
     when(apiService.fetchPosts()).thenThrow(new PostFetchException(new RuntimeException()));
 
-    assertThrows(PostFetchException.class, () -> postService.fetchAndSavePosts());
+    assertThrows(PostFetchException.class, () -> postService.fetchSavePosts());
   }
 
   @Test
-  void fetchAndSavePosts_shouldThrowPostSaveException_whenStorageFails() {
+  void syncException_whenStorageFails() {
     List<Post> posts = Collections.singletonList(new Post(1, 1, "title", "body"));
     when(apiService.fetchPosts()).thenReturn(posts);
     doThrow(new PostSaveException(new RuntimeException()))
         .when(postStorageService)
         .savePosts(posts);
 
-    assertThrows(PostSaveException.class, () -> postService.fetchAndSavePosts());
+    assertThrows(PostSaveException.class, () -> postService.fetchSavePosts());
   }
 }

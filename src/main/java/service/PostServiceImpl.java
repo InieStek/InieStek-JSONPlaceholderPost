@@ -14,8 +14,7 @@ public class PostServiceImpl implements PostService {
     this.postStorageService = postStorageService;
   }
 
-  @Override
-  public void fetchAndSavePosts() throws PostFetchException, PostSaveException {
+  public void fetchSavePosts() throws PostFetchException, PostSaveException {
     List<Post> posts = apiService.fetchPosts();
     postStorageService.savePosts(posts);
   }
