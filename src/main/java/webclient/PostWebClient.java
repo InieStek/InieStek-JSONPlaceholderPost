@@ -10,16 +10,16 @@ import validators.StatusValidator;
 public class PostWebClient {
 
   private final HttpClient httpClient;
+  private final String apiUrl;
 
-  public PostWebClient(HttpClient httpClient) {
+  public PostWebClient(HttpClient httpClient, String apiUrl) {
     this.httpClient = httpClient;
+    this.apiUrl = apiUrl;
   }
 
   public String getPosts() throws Exception {
-    String url = "https://jsonplaceholder.typicode.com/posts";
-
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(url))
+        .uri(URI.create(apiUrl))
         .GET()
         .build();
 
