@@ -40,11 +40,3 @@ The project includes a complete set of unit tests. To run them, execute the foll
 ```bash
 mvn test
 ```
-
-## CI/CD
-
-This project uses **GitHub Actions** for Continuous Integration. The workflow is defined in `.github/workflows/github-actions-ci.yml` and includes the following steps:
-
--   **Trigger:** The workflow runs automatically on every `push` and `pull_request` to the `main` branch.
--   **Environment:** It runs on an `ubuntu-latest` runner.
--   **Build & Test:** It checks out the code, sets up JDK 17, and runs `mvn -B package --file pom.xml` to build the project and run all tests.
