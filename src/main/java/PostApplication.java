@@ -31,7 +31,7 @@ public class PostApplication {
       PostStorageService postStorageService = new PostStorageServiceImpl(gson, path);
 
       PostService service = new PostServiceImpl(apiService, postStorageService);
-      service.fetchSavePosts();
+      service.processPosts();
       System.out.println("Successfully fetched and saved posts to '" + path.toAbsolutePath() + "'.");
     } catch (PostFetchException | PostSaveException | ConfigLoadException e) {
       System.err.println(e.getMessage());

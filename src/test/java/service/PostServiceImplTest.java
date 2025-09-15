@@ -26,21 +26,21 @@ class PostServiceImplTest {
   @InjectMocks private PostServiceImpl postService;
 
   @Test
-  void fetchSavePosts_shouldCallApiAndStorageServices() {
+  void processPosts_shouldCallApiAndStorageServices() {
     List<Post> posts = Collections.singletonList(new Post(1, 1, "title", "body"));
     when(apiService.fetchPosts()).thenReturn(posts);
 
-    postService.fetchSavePosts();
+    postService.processPosts();
 
     verify(apiService).fetchPosts();
     verify(postStorageService).savePosts(posts);
   }
 
   @Test
-  void fetchSavePosts_shouldThrowPostFetchException_whenApiFails() {
+  void processPosts_shouldThrowPostFetchException_whenApiFails() {
     when(apiService.fetchPosts()).thenThrow(new PostFetchException(new RuntimeException()));
 
-    assertThrows(PostFetchException.class, () -> postService.fetchSavePosts());
+    assertThrows(PostFetchException.class, () -> postService.processPosts());
   }
 
   @Test
@@ -51,6 +51,6 @@ class PostServiceImplTest {
         .when(postStorageService)
         .savePosts(posts);
 
-    assertThrows(PostSaveException.class, () -> postService.fetchSavePosts());
+    assertThrows(PostSaveException.class, () -> postService.processPosts());
   }
 }
